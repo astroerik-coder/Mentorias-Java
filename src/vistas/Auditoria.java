@@ -4,6 +4,8 @@
  */
 package vistas;
 
+import Utilidades.Utilidades;
+
 /**
  *
  * @author Usuario
@@ -27,21 +29,22 @@ public class Auditoria extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
-        btnListarUsuarios = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         title = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListar = new javax.swing.JTable();
+        btnListarUsuarios1 = new javax.swing.JButton();
 
         setBorder(null);
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
         setTitle("Auditoria");
-        setMaximumSize(new java.awt.Dimension(700, 700));
-        setMinimumSize(new java.awt.Dimension(700, 700));
-        setPreferredSize(new java.awt.Dimension(700, 700));
+        setMaximumSize(new java.awt.Dimension(800, 700));
+        setMinimumSize(new java.awt.Dimension(800, 700));
+        setPreferredSize(new java.awt.Dimension(800, 700));
 
         bg.setBackground(new java.awt.Color(57, 57, 57));
         bg.setMaximumSize(new java.awt.Dimension(800, 600));
@@ -50,15 +53,15 @@ public class Auditoria extends javax.swing.JInternalFrame {
         bg.setPreferredSize(new java.awt.Dimension(800, 600));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnListarUsuarios.setBackground(new java.awt.Color(18, 154, 118));
-        btnListarUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        btnListarUsuarios.setText("Usuarios Borrados");
-        btnListarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.setBackground(new java.awt.Color(18, 154, 118));
+        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarUsuariosActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
-        bg.add(btnListarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 140, 30));
+        bg.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, 140, 30));
 
         title.setBackground(new java.awt.Color(18, 154, 118));
         title.setForeground(new java.awt.Color(18, 154, 118));
@@ -89,6 +92,16 @@ public class Auditoria extends javax.swing.JInternalFrame {
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 780, 340));
 
+        btnListarUsuarios1.setBackground(new java.awt.Color(18, 154, 118));
+        btnListarUsuarios1.setForeground(new java.awt.Color(255, 255, 255));
+        btnListarUsuarios1.setText("Actualizar");
+        btnListarUsuarios1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarUsuarios1ActionPerformed(evt);
+            }
+        });
+        bg.add(btnListarUsuarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 140, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,14 +116,21 @@ public class Auditoria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnListarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarUsuariosActionPerformed
-        
-    }//GEN-LAST:event_btnListarUsuariosActionPerformed
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        Utilidades u= new Utilidades();
+        u.limpiartabla(tblListar);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnListarUsuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarUsuarios1ActionPerformed
+        Gestion.GestionAuditoria ga= new Gestion.GestionAuditoria();
+        ga.MostrarAuditoria(tblListar);
+    }//GEN-LAST:event_btnListarUsuarios1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnListarUsuarios;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnListarUsuarios1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
