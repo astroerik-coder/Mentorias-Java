@@ -52,7 +52,7 @@ public class GestionMentorias extends Conexion{
     //Actualizar
     public void actualizarMentoria(Mentoria ment) {
         try {
-            PreparedStatement ps = this.conectar().prepareStatement("exec actualizar_mentoria ?,?,?,?,?,?,?,?,?");
+            PreparedStatement ps = this.conectar().prepareStatement("exec actualizar_mentoria ?,?,?,?,?,?,?,?,?,?");
 
            ps.setString(1, ment.getId());
             ps.setString(2, ment.getNombre());
@@ -63,6 +63,7 @@ public class GestionMentorias extends Conexion{
             ps.setString(7, ment.getIdEmprendedor());
             ps.setString(8, ment.getIdEncargado());
             ps.setString(9, ment.getIdContenido());
+            ps.setString(10,dato);
 
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "MENTORIA ACTUALIZADO CORRECTAMENTE");
