@@ -56,15 +56,15 @@ id_emp char(10) constraint cod_emp_fk references emprendedor (id_emp),
 
 create table mentorias
 (
-id_men char(10) constraint cod_men_pk primary key,
-nombre_men char(100),
-descripcion_men varchar(1000),
-fecha_men date,
-hora_men char(10),
-observaciones_men varchar (1000),
-id_emp char(10) constraint cod_emp_fk1 references emprendedor (id_emp),
-id_enc char(10) constraint cod_enc_fk references Encargado_Mentoria (id_enc),
-codigo_con char(10) constraint cod_con_fk references contenido (codigo_con)
+	id_men char(10) constraint cod_men_pk primary key,
+	nombre_men char(100),
+	descripcion_men varchar(1000),
+	fecha_men date,
+	hora_men char(10),
+	observaciones_men varchar (1000),
+	id_emp char(10) constraint cod_emp_fk1 references emprendedor (id_emp),
+	id_enc char(10) constraint cod_enc_fk references Encargado_Mentoria (id_enc),
+	codigo_con char(10) constraint cod_con_fk references contenido (codigo_con)
 );
 
 --Tabla Usuarios

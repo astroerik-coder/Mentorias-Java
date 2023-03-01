@@ -41,7 +41,21 @@ create table respaldo_mentorias
 	observaciones_men varchar (1000),
 	id_emp char(10),
 	id_enc char(10),
-	codigo_con char(10),
+	codigo_con char(10)
+);
+
+--Respaldo Actualizacion Mentorias
+create table respaldo_actualizacion_mentorias
+(
+	id_men char(10) ,
+	nombre_men char(100),
+	descripcion_men varchar(1000),
+	fecha_men date,
+	hora_men char(10),
+	observaciones_men varchar (1000),
+	id_emp char(10),
+	id_enc char(10),
+	codigo_con char(10)
 );
 
 --Create Triger
@@ -52,7 +66,6 @@ create  trigger tr_respaldo_mentoria on mentorias
 after delete 
 as 
 begin
-	DECLARE 
 	--utiliza para evitar que se muestre un mensaje de conteo de filas afectadas después de la operació
 	SET NOCOUNT ON;
 	insert into respaldo_mentorias (id_men, nombre_men, descripcion_men, fecha_men, hora_men,observaciones_men,id_emp, id_enc, codigo_con)
@@ -60,7 +73,6 @@ begin
 end;
 
 select *from respaldo_mentorias;
-
 
 
 --Tabla Auditorias
@@ -74,7 +86,6 @@ create table auditorias
 	observaciones_aud  varchar (1000)
 );
 
---Actualizar
 --Insertar
 create proc insertar_mentoria
 	@id_men char(10),
@@ -89,7 +100,7 @@ create proc insertar_mentoria
 	@usuario char(20)
 AS
 BEGIN
-	 SET NOCOUNT ON;
+	SET NOCOUNT ON;
 	Insert into mentorias values (@id_men,@nombre_men,@descripcion_men,@fecha_men,@hora_men,@observaciones_enc,@id_emp,@id_enc,@cod_con);
 	Insert into auditorias values(GETDATE(),@usuario,'mentorias','INSERT','');
 END
@@ -100,3 +111,56 @@ select * from auditorias
 
 select * from respaldo_mentorias
 exec visualizar_mentoria;
+
+
+---Trigger de respaldo de mentorias cuando se actualiza
+create trigger respaldo_act_mentorias
+ON mentorias
+FOR UPDATE
+AS 
+BEGIN
+	INSERT INTO respaldo_actualizacion_mentorias (id_men, nombre_men, descripcion_men, fecha_men, hora_men,observaciones_men,id_emp, id_enc, codigo_con)
+	SELECT d.codigo_con,d.nombre_men,d.descripcion_men,d.fecha_men,d.hora_men,d.observaciones_men,d.id_emp,d.id_enc, d.codigo_con from deleted as d;
+END;
+
+
+--Actualizar mentorias
+create proc actualizar_mentoria
+@id_men char(10),
+@nombre_men char(100),
+@descripcion_men varchar(1000),
+@fecha_men date,
+@hora_men char(10),
+@observaciones_enc varchar(1000),
+@id_emp char(10),
+@id_enc char(10),
+@cod_con char(10),
+@usuario char(10)
+as
+begin 
+Update mentorias
+set			
+	nombre_men=@nombre_men ,
+	descripcion_men=@descripcion_men ,
+	fecha_men=@fecha_men ,
+	hora_men=@hora_men ,
+	observaciones_men=@observaciones_enc ,
+	id_emp=@id_emp ,
+	id_enc=@id_enc ,
+	codigo_con=@cod_con 	
+where @id_men=id_men;
+	Insert into auditorias values(GETDATE(),@usuario,'mentorias','UPDATE','');
+end;
+
+select * from respaldo_actualizacion_mentorias;
+
+select * from auditorias;
+
+
+--Borrado
+create proc eliminar_mentoria
+@id_ment char(10),
+@usuario char(10)
+as
+	Insert into auditorias values(GETDATE(),@usuario,'mentorias','DELETE','');
+	DELETE FROM mentorias where id_men=@id_ment;
