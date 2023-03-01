@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import vistas.GestionLogin;
 import vistas.Menu;
 import vistas.Menu;
 /**
@@ -17,8 +18,13 @@ import vistas.Menu;
  * @author nitro
  */
 public class GestionMentorias extends Conexion{
+     GestionLogin gl= new GestionLogin();
+     String dato=gl.enviarUser();
+
     //Insertar
      public void InsertarMentoria(Mentoria ment) {
+                 System.out.println("recibio en gestion:"+dato);
+
         try {
             PreparedStatement ps = this.conectar().prepareStatement("exec insertar_mentoria ?,?,?,?,?,?,?,?,?,?");
 
@@ -31,6 +37,7 @@ public class GestionMentorias extends Conexion{
             ps.setString(7, ment.getIdEmprendedor());
             ps.setString(8, ment.getIdEncargado());
             ps.setString(9, ment.getIdContenido());
+            ps.setString(10,dato);
             
             
             ps.executeUpdate();

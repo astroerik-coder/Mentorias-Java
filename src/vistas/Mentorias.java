@@ -7,7 +7,6 @@ import Tablas.ListarMentorias;
 import javax.swing.JOptionPane;
 import Utilidades.Utilidades;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;

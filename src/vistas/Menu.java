@@ -260,7 +260,6 @@ public class Menu extends javax.swing.JFrame {
     public void obtenerUser(String dato) {
         this.dato = dato;
         lblUsuario.setText(dato);
-
     }
 
     private void mostrarTiempo() {

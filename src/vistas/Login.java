@@ -1,6 +1,5 @@
 package vistas;
 
-import Gestion.GestionMentorias;
 import Gestion.GestionUsuario;
 import java.awt.Color;
 import java.awt.Image;
@@ -10,7 +9,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
      GestionUsuario gu = new GestionUsuario();
-     GestionMentorias gm=new GestionMentorias();
+     GestionLogin gl= new GestionLogin();
     int nv = 0;
 
     public Login() {
@@ -151,19 +150,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLoginActionPerformed
 
     private void btnIngrasarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngrasarActionPerformed
-        // TODO add your handling code here:
-       
-
-
-        if (gu.verificarUsuario(txtLogin.getText(), txtContraseña.getText()) == true) {
+      if (gu.verificarUsuario(txtLogin.getText(), txtContraseña.getText()) == true) {
             /**
              * JOptionPane.showMessageDialog(null, "-> Si Pertenece a Mentorias <-");
              */
             String userDb= txtLogin.getText();
                         
             Menu pri = new Menu();
-            Login lg= new Login();
             pri.obtenerUser(userDb);
+            
+            
             
             String permisos = gu.getrolBin(txtLogin.getText(), txtContraseña.getText());
             System.out.println("Usuario: "+txtLogin.getText());
@@ -171,6 +167,14 @@ public class Login extends javax.swing.JFrame {
             System.out.println(permisos);
 
             String permisosDiv[] = permisos.split("");
+            //Array de usuario
+            String arra[]=new String[1];
+            for (int i = 0; i < arra.length; i++) {
+                arra[i]=txtLogin.getText();
+                System.out.println("User save: "+arra[i]);
+            }
+            gl.obtenerUser(arra);
+            
             int length = permisosDiv.length;
             System.out.println("tamaño array: " + length);
             //System.out.println(permisosDiv[4]);
