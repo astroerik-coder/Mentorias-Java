@@ -54,7 +54,7 @@ public class GestionMentorias extends Conexion{
         try {
             PreparedStatement ps = this.conectar().prepareStatement("exec actualizar_mentoria ?,?,?,?,?,?,?,?,?,?");
 
-           ps.setString(1, ment.getId());
+            ps.setString(1, ment.getId());
             ps.setString(2, ment.getNombre());
             ps.setString(3, ment.getDescripcion());
             ps.setString(4, ment.getFecha());
@@ -77,8 +77,9 @@ public class GestionMentorias extends Conexion{
     public boolean eliminarMentoria(String codigo) {
         boolean op = false;
         try {
-            CallableStatement ps = this.conectar().prepareCall("exec eliminar_mentoria ?");
+            CallableStatement ps = this.conectar().prepareCall("exec eliminar_mentoria ?,?");
             ps.setString(1, codigo);
+            ps.setString(2, dato);
             ps.executeUpdate();
             op = true;
             ps.close();
